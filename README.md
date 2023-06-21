@@ -4,4 +4,4 @@ In each directory, do:
  
  npm install --save
  
- npm run
+ npm start
