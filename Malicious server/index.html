@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Malicious server</title>
+</head>
+
+<body>
+  <h1>Malicious server</h1>
+
+
+  <!-- IMG tag problem  -->
+
+  <div>
+
+    <p>No-CORS img tag:
+      <img width="50px" heigth="50px" src="http://localhost:3000/favro-logo-no-cors" alt="">
+    </p>
+
+    <p>CORS img tag:
+      <img width="50px" heigth="50px" src="http://localhost:3000/favro-logo-cors" alt="">
+    </p>
+
+    <p>img tag bypasses CORS!</p>
+    <p>That's where Cross-Origin Request Blocking (CORB) steps in</p>
+    <p>
+      <img width="100px" heigth="100px" src="http://localhost:3000/home" alt="">
+      <img width="100px" heigth="100px" src="http://www.unizg.hr/" alt="">
+    </p>
+
+    <p> However, CORB is supported by Chromium and Safari browsers only (e.g., Firefox does not support it:
+      https://bugzilla.mozilla.org/show_bug.cgi?id=1532642)</p>
+    <img width="100px" heigth="100px" src="https://www.google.hr/" alt="">
+  </div>
+
+</body>
+
+
+<script type="text/javascript">
+  /**/
+  // 1. [SIMPLE] GET cross-origin request with no CORS --> FAIL
+  {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:3000/favro-logo-no-cors", true);
+    xhttp.send();
+  }
+
+  // 2. [SIMPLE] GET cross-origin request with CORS * --> SUCCESS
+  {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:3000/favro-logo-cors", true);
+    xhttp.send();
+  }
+
+  // 3. [COMPLEX/PREFLIGHT] POST cross-origin request CORS * --> SUCCESS
+  {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/complex-cors", true);
+    xhttp.setRequestHeader("Content-Type", "text/xml");
+    xhttp.setRequestHeader("TEST", "TEST");
+    xhttp.send(JSON.stringify("{username: password}"));
+  }
+
+  // 4. Loading Favro
+  {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://favro.com/organization/54f72cf77fb4776c31d006ee/ef92ea5507ed991eb9458b24", true);
+    xhttp.send();
+
+  }
+
+</script>
+
+</html>
