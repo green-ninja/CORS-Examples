@@ -1,5 +1,5 @@
 # CORS-Examples
 
-### In each directory, do: 
-### npm install --save
-### npm run
+In each directory, do: 
+ npm install --save
+ npm run
